@@ -4,28 +4,27 @@ import TimerModal from './components/TimerModal';
 const App = () => {
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [intervalId, setIntervalId] = useState(null);
+  const [startTime, setStartTime] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   const startPauseTimer = () => {
     if (isRunning) {
-      clearInterval(intervalId);
+      setElapsedTime(elapsedTime + (Date.now() - startTime));
       setIsRunning(false);
     } else {
-      const id = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
-      }, 1000);
-      setIntervalId(id);
+      setStartTime(Date.now());
       setIsRunning(true);
     }
   };
-
   useEffect(() => {
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [intervalId]);
+    let interval;
+    if (isRunning) {
+      interval = setInterval(() => {
+        setSeconds((prevSeconds) => Math.floor((Date.now() - startTime + elapsedTime) / 1000));
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isRunning, startTime, elapsedTime]);
 
   const formatTime = () => {
     const minutes = Math.floor(seconds / 60);
