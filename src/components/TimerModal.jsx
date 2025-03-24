@@ -1,5 +1,5 @@
 import React from 'react';
-import Timer from './Timer';
+import Timer from './TimeCounter';
 
 const TimerModal = ({ seconds, isRunning, startPauseTimer, formatTime }) => {
   return (
