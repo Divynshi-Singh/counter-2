@@ -1,18 +1,18 @@
 import React from 'react';
 import Timer from './Timer';
 
-const TimerModal = ({ isOpen, onClose }) => {
+const TimerModal = ({ isOpen, onClose, seconds, isRunning, startPauseTimer, formatTime }) => {
   if (!isOpen) return null;
 
   return (
     <div
-      className="modal fade show d-block "
+      className="modal fade show d-block"
       style={{ marginTop: '180px' }}
       tabIndex="-1"
       aria-labelledby="timerModalLabel"
       aria-hidden="false"
     >
-      <div className="modal-dialog ">
+      <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="timerModalLabel">Timer</h5>
@@ -24,7 +24,12 @@ const TimerModal = ({ isOpen, onClose }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <Timer />
+            <Timer
+              seconds={seconds}
+              isRunning={isRunning}
+              startPauseTimer={startPauseTimer}
+              formatTime={formatTime}
+            />
           </div>
         </div>
       </div>
