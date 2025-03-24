@@ -1,16 +1,14 @@
 import React from 'react';
 import Timer from './Timer';
 
-const TimerModal = ({ isOpen, onClose, seconds, isRunning, startPauseTimer, formatTime }) => {
-  if (!isOpen) return null;
-
+const TimerModal = ({ seconds, isRunning, startPauseTimer, formatTime }) => {
   return (
     <div
-      className="modal fade show d-block"
-      style={{ marginTop: '180px' }}
+      className="modal fade"
+      id="timerModal"
       tabIndex="-1"
       aria-labelledby="timerModalLabel"
-      aria-hidden="false"
+      aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -19,7 +17,7 @@ const TimerModal = ({ isOpen, onClose, seconds, isRunning, startPauseTimer, form
             <button
               type="button"
               className="btn-close"
-              onClick={onClose}
+              data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
